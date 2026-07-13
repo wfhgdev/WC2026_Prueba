@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFA World Cup 2026 — Matches & Results</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-purple-50/40 min-h-screen">
+
+  <!-- Nav -->
+  <header class="border-b border-gray-100 bg-white">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <a href="index.html" class="text-2xl font-black italic text-gray-900">FIFA WORLD CUP <span class="text-purple-700">2026</span></a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-600">
+        <a href="index.html" class="text-purple-700 border-b-2 border-purple-700 pb-1">MATCHES</a>
+        <a href="groups.html" class="hover:text-gray-900">GROUPS</a>
+        <a href="knockout.html" class="hover:text-gray-900">KNOCKOUT</a>
+        <a href="stats.html" class="hover:text-gray-900">STATS</a>
+      </nav>
+      <button class="bg-purple-700 text-white text-sm font-bold px-5 py-2.5 rounded-lg hover:bg-purple-800">TICKETS</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+    <div>
+      <h1 class="text-5xl font-black text-gray-900">Matches &amp; Results</h1>
+      <p class="text-gray-500 mt-3 max-w-xl">Follow the action from the pitch. Live scores, upcoming fixtures, and complete tournament results.</p>
+    </div>
+    <div class="flex gap-2 flex-wrap" id="filter-group">
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-600" data-filter="scheduled">Scheduled</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-600" data-filter="live">● Live</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-gray-100 text-gray-600" data-filter="finished">Finished</button>
+      <button class="filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-purple-100 text-purple-700" data-filter="all">All</button>
+    </div>
+  </section>
+
+  <!-- Matches grid (rendered by js/matches.js) -->
+  <main class="max-w-7xl mx-auto px-6 pb-16">
+    <div id="matches-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Loading skeletons shown until data arrives -->
+      <div class="bg-white rounded-2xl border border-gray-100 p-6 animate-pulse h-64"></div>
+      <div class="bg-white rounded-2xl border border-gray-100 p-6 animate-pulse h-64"></div>
+      <div class="bg-white rounded-2xl border border-gray-100 p-6 animate-pulse h-64"></div>
+    </div>
+  </main>
+
+  <footer class="bg-gray-900 text-gray-400 text-sm">
+    <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between gap-4">
+      <span class="font-black italic text-white">FIFA WORLD CUP 2026</span>
+      <span>© 2026 FIFA World Cup. All Rights Reserved.</span>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/matches.js"></script>
+</body>
+</html>
