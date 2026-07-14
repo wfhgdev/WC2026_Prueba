@@ -3,16 +3,16 @@
  * Configuración central de la API de football-data.org.
  * Todas las páginas cargan este archivo primero.
  *
- * ADVERTENCIA DE SEGURIDAD:
- * Este token queda visible en el código fuente que recibe el navegador
- * (cualquiera puede verlo con las DevTools). Para una API gratuita de
- * solo lectura como esta es un riesgo aceptable, pero si este proyecto
- * creciera a producción real, lo correcto sería mover las llamadas a
- * un backend/proxy propio que oculte el token.
+ * IMPORTANTE:
+ * Ya no llamamos a football-data.org directamente desde el navegador
+ * (eso causaba el error de CORS). En su lugar, le pedimos los datos a
+ * nuestro propio proxy en /api/football, que corre en el servidor de
+ * Vercel y reenvía la petición con el token oculto.
+ * El token real vive como variable de entorno FOOTBALL_DATA_TOKEN en
+ * el panel de Vercel (Settings → Environment Variables), no aquí.
  */
 const API_CONFIG = {
-  TOKEN: 'f97d70b1c3f54fa38cd4d9ab444f4073',
-  BASE_URL: 'https://api.football-data.org/v4',
+  BASE_URL: '/api/football', // Nuestro proxy propio, no la API externa
   COMPETITION_CODE: 'WC', // Código de la Copa del Mundo en football-data.org
   // La API gratuita permite 10 peticiones por minuto: cacheamos las
   // respuestas en sessionStorage por este tiempo para no agotar el límite

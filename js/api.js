@@ -23,9 +23,12 @@ async function fetchFromApi(endpoint) {
     }
   }
 
-  const response = await fetch(`${API_CONFIG.BASE_URL}${endpoint}`, {
-    headers: { 'X-Auth-Token': API_CONFIG.TOKEN },
-  });
+  // Le pedimos los datos a NUESTRO proxy (mismo dominio → sin CORS),
+  // pasándole el endpoint real de football-data.org como parámetro.
+  // El proxy es quien agrega el token y llama a la API externa.
+  const response = await fetch(
+    `${API_CONFIG.BASE_URL}?endpoint=${encodeURIComponent(endpoint)}`
+  );
 
   if (response.status === 429) {
     throw new Error('Se alcanzó el límite de peticiones a la API (10/minuto). Esperá un momento e intentá de nuevo.');
