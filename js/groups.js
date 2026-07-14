@@ -1,63 +1,71 @@
-// js/groups.js
-// Renders one standings table per group. Falls back to a static
-// two-group sample if the live API call fails.
+/**
+ * groups.js
+ * Lógica de groups.html: pinta la tabla de posiciones de cada grupo.
+ */
 
-const MOCK_STANDINGS = [
-  {
-    group: 'GROUP_A',
-    table: [
-      { position: 1, team: { name: 'Argentina', crest: 'https://flagcdn.com/ar.svg' }, points: 6, playedGames: 2, won: 2, draw: 0, lost: 0, goalDifference: 4 },
-      { position: 2, team: { name: 'Netherlands', crest: 'https://flagcdn.com/nl.svg' }, points: 4, playedGames: 2, won: 1, draw: 1, lost: 0, goalDifference: 2 },
-      { position: 3, team: { name: 'Senegal', crest: 'https://flagcdn.com/sn.svg' }, points: 1, playedGames: 2, won: 0, draw: 1, lost: 1, goalDifference: -1 },
-      { position: 4, team: { name: 'Qatar', crest: 'https://flagcdn.com/qa.svg' }, points: 0, playedGames: 2, won: 0, draw: 0, lost: 2, goalDifference: -5 },
-    ],
-  },
-  {
-    group: 'GROUP_B',
-    table: [
-      { position: 1, team: { name: 'England', crest: 'https://flagcdn.com/gb-eng.svg' }, points: 7, playedGames: 3, won: 2, draw: 1, lost: 0, goalDifference: 7 },
-      { position: 2, team: { name: 'USA', crest: 'https://flagcdn.com/us.svg' }, points: 5, playedGames: 3, won: 1, draw: 2, lost: 0, goalDifference: 1 },
-      { position: 3, team: { name: 'Iran', crest: 'https://flagcdn.com/ir.svg' }, points: 3, playedGames: 3, won: 1, draw: 0, lost: 2, goalDifference: -3 },
-      { position: 4, team: { name: 'Wales', crest: 'https://flagcdn.com/gb-wls.svg' }, points: 1, playedGames: 3, won: 0, draw: 1, lost: 2, goalDifference: -5 },
-    ],
-  },
-];
+const groupsGrid = document.querySelector('#groups-grid');
 
-function renderGroupTable(group) {
-  const groupLabel = group.group.replace('GROUP_', 'Group ');
-  const rows = group.table
-    .map(
-      (row) => `
-      <tr class="border-t border-gray-100">
-        <td class="py-3 px-2 font-bold text-gray-900">${row.position}</td>
-        <td class="py-3 px-2 flex items-center gap-3">
-          <img src="${row.team.crest}" class="w-6 h-6 rounded-full object-cover" alt="${row.team.name} flag" />
-          <span class="font-semibold text-gray-900">${row.team.name}</span>
-        </td>
-        <td class="py-3 px-2 font-bold text-right">${row.points}</td>
-        <td class="py-3 px-2 text-right text-gray-500">${row.playedGames}</td>
-        <td class="py-3 px-2 text-right text-gray-500">${row.won}</td>
-        <td class="py-3 px-2 text-right text-gray-500">${row.draw}</td>
-        <td class="py-3 px-2 text-right text-gray-500">${row.lost}</td>
-        <td class="py-3 px-2 text-right font-semibold">${row.goalDifference > 0 ? '+' : ''}${row.goalDifference}</td>
-      </tr>`
-    )
-    .join('');
+async function initGroupsPage() {
+  groupsGrid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">Cargando grupos…</p>`;
+
+  try {
+    const standings = await getStandings();
+    renderGroups(standings);
+  } catch (error) {
+    console.error('Error al cargar los grupos:', error);
+    renderError(groupsGrid, error.message);
+  }
+}
+
+/** Dibuja una tarjeta de tabla de posiciones por cada grupo */
+function renderGroups(standings) {
+  if (!standings || standings.length === 0) {
+    groupsGrid.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">Los grupos todavía no están definidos.</p>`;
+    return;
+  }
+
+  groupsGrid.innerHTML = standings.map(groupTableHTML).join('');
+}
+
+/** Construye el HTML de la tabla de un grupo individual */
+function groupTableHTML(group) {
+  const rows = group.table.map(row => `
+    <tr class="border-t border-gray-100">
+      <td class="py-3 pl-2 relative">
+        <span class="absolute left-0 top-0 bottom-0 w-1 ${row.position <= 2 ? 'bg-emerald-400' : 'bg-transparent'}"></span>
+        <span class="font-bold text-gray-500 pl-2">${row.position}</span>
+      </td>
+      <td class="py-3">
+        <div class="flex items-center gap-3">
+          ${flagImgHTML(row.team.name, 'w-6 h-6')}
+          <span class="font-semibold">${row.team.name}</span>
+        </div>
+      </td>
+      <td class="py-3 text-center font-bold">${row.points}</td>
+      <td class="py-3 text-center text-gray-500">${row.playedGames}</td>
+      <td class="py-3 text-center text-gray-500">${row.won}</td>
+      <td class="py-3 text-center text-gray-500">${row.draw}</td>
+      <td class="py-3 text-center text-gray-500">${row.lost}</td>
+      <td class="py-3 text-center text-gray-500">${row.goalDifference > 0 ? '+' : ''}${row.goalDifference}</td>
+    </tr>
+  `).join('');
 
   return `
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-      <div class="bg-gray-900 text-white px-6 py-4 font-bold text-lg">${groupLabel}</div>
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <div class="bg-slate-900 text-white px-6 py-4">
+        <h2 class="text-xl font-black">${translateGroup(group.group) || 'Grupo'}</h2>
+      </div>
       <table class="w-full text-sm">
-        <thead class="text-gray-400 text-xs uppercase">
-          <tr>
-            <th class="text-left py-2 px-2">Pos</th>
-            <th class="text-left py-2 px-2">Team</th>
-            <th class="text-right py-2 px-2">Pts</th>
-            <th class="text-right py-2 px-2">MP</th>
-            <th class="text-right py-2 px-2">W</th>
-            <th class="text-right py-2 px-2">D</th>
-            <th class="text-right py-2 px-2">L</th>
-            <th class="text-right py-2 px-2">GD</th>
+        <thead>
+          <tr class="text-left text-xs text-gray-400 uppercase">
+            <th class="py-2 pl-2">Pos</th>
+            <th class="py-2">Equipo</th>
+            <th class="py-2 text-center">Pts</th>
+            <th class="py-2 text-center">PJ</th>
+            <th class="py-2 text-center">G</th>
+            <th class="py-2 text-center">E</th>
+            <th class="py-2 text-center">P</th>
+            <th class="py-2 text-center">DG</th>
           </tr>
         </thead>
         <tbody>${rows}</tbody>
@@ -66,15 +74,4 @@ function renderGroupTable(group) {
   `;
 }
 
-async function loadStandings() {
-  const container = document.getElementById('groups-container');
-  try {
-    const standings = await worldCupApi.getStandings();
-    container.innerHTML = standings.map(renderGroupTable).join('');
-  } catch (error) {
-    console.warn('Live API unavailable, using fallback standings:', error.message);
-    container.innerHTML = MOCK_STANDINGS.map(renderGroupTable).join('');
-  }
-}
-
-loadStandings();
+initGroupsPage();

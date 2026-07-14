@@ -1,0 +1,16 @@
+/* styles.css
+   Solo lo que Tailwind (vía CDN) no resuelve con clases utilitarias */
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Punto rojo pulsante en el filtro "En Vivo" */
+.filter-btn span.bg-red-500 {
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
