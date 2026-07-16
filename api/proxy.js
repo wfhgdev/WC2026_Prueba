@@ -1,31 +1,31 @@
 // ============================================
 // Vercel Serverless Proxy — Football-Data.org
 // ============================================
-// Аналог proxy.php для хостинга без PHP (Vercel)
+// Equivalente a proxy.php para hosting sin PHP (Vercel)
 // ============================================
 
 export default async function handler(req, res) {
-  // Настройка CORS
+  // Configuración CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Auth-Token, Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Auth-Token', 'Content-Type');
 
-  // Ответ на preflight OPTIONS
+  // Respuesta para preflight OPTIONS
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return;
   }
 
-  // Только GET
+  // Solo GET
   if (req.method !== 'GET') {
-    res.status(405).json({ error: 'Метод не разрешён' });
+    res.status(405).json({ error: 'Método no permitido' });
     return;
   }
 
   const endpoint = req.query.endpoint || '';
 
   if (!endpoint) {
-    res.status(400).json({ error: 'Отсутствует параметр endpoint' });
+    res.status(400).json({ error: 'Falta el parámetro endpoint' });
     return;
   }
 
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
     const data = await response.json();
     res.status(response.status).json(data);
   } catch (error) {
-    console.error('Ошибка прокси:', error.message);
-    res.status(500).json({ error: 'Ошибка соединения с API футбольных данных' });
+    console.error('Error del proxy:', error.message);
+    res.status(500).json({ error: 'Error al conectar con la API de datos futbolísticos' });
   }
 }
