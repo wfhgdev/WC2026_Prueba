@@ -1,84 +1,207 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html class="light" lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Partidos y Resultados | Copa del Mundo 2026</title>
-
-<!-- Tailwind CSS vía CDN, para desarrollo rápido sin paso de build -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  // Extendemos la paleta de Tailwind con los colores de marca del sitio
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: { brand: { purple: '#4f46e5', dark: '#3730a3' } },
-        fontFamily: { display: ['Poppins', 'sans-serif'] },
-      },
-    },
-  };
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>COPA MUNDIAL FIFA 2026 - Inicio</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="tailwindCustom.js"></script>
+  <link rel="stylesheet" href="index.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700;900&display=swap"
+    rel="stylesheet" />
 </head>
-<body class="bg-violet-50 font-sans text-gray-900">
 
-  <!-- ===== Barra de navegación (igual en las 4 páginas) ===== -->
-  <header class="bg-white border-b border-gray-100">
-    <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-      <a href="index.html" class="font-display font-black text-xl italic text-brand-purple">FIFA WORLD CUP 2026</a>
-      <ul class="hidden md:flex items-center gap-8 font-semibold text-gray-500">
-        <li><a href="index.html" class="text-brand-purple border-b-2 border-brand-purple pb-1">MATCHES</a></li>
-        <li><a href="groups.html" class="hover:text-brand-purple">GROUPS</a></li>
-        <li><a href="knockout.html" class="hover:text-brand-purple">KNOCKOUT</a></li>
-        <li><a href="stats.html" class="hover:text-brand-purple">STATS</a></li>
-      </ul>
-      <a href="#" class="bg-brand-purple text-white font-bold text-sm px-5 py-2.5 rounded-lg hover:bg-brand-dark transition">TICKETS</a>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+  <!-- Mobile Menu Overlay -->
+  <div class="fixed inset-0 z-[100] bg-surface flex-col p-margin-mobile hidden" id="mobile-menu-overlay">
+    <div class="flex justify-between items-center mb-stack-lg h-20">
+      <a class="font-display-xl-mobile text-headline-lg-mobile font-black text-primary italic tracking-tighter" href="index.html">
+        FIFA WORLD CUP 2026
+      </a>
+      <button class="text-on-surface-variant p-2 rounded-full hover:bg-surface-container-low transition-colors" id="close-menu">
+        <span class="material-symbols-outlined text-3xl">close</span>
+      </button>
+    </div>
+    <nav class="flex flex-col gap-stack-md mt-4">
+      <a class="text-primary text-3xl py-4 border-b border-outline-variant flex justify-between items-center font-bold" href="index.html">
+        Inicio <span class="material-symbols-outlined">chevron_right</span>
+      </a>
+      <a class="text-on-surface text-3xl py-4 border-b border-outline-variant flex justify-between items-center font-bold" href="matches/matches.html">
+        Partidos <span class="material-symbols-outlined">chevron_right</span>
+      </a>
+      <a class="text-on-surface text-3xl py-4 border-b border-outline-variant flex justify-between items-center font-bold" href="groups/groups.html">
+        Grupos <span class="material-symbols-outlined">chevron_right</span>
+      </a>
+      <a class="text-on-surface text-3xl py-4 border-b border-outline-variant flex justify-between items-center font-bold" href="knockout/knockout.html">
+        Eliminatorias <span class="material-symbols-outlined">chevron_right</span>
+      </a>
+      <a class="text-on-surface text-3xl py-4 border-b border-outline-variant flex justify-between items-center font-bold" href="stats/stats.html">
+        Estadísticas <span class="material-symbols-outlined">chevron_right</span>
+      </a>
     </nav>
-  </header>
+    <div class="mt-auto mb-stack-lg">
+      <button class="gradient-btn text-on-primary w-full py-5 rounded-xl font-headline-md text-headline-md shadow-md">
+        Tickets
+      </button>
+    </div>
+  </div>
 
-  <main class="max-w-7xl mx-auto px-6 py-10">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
-      <div>
-        <h1 class="font-display font-black text-4xl md:text-5xl mb-3">Partidos y Resultados</h1>
-        <p class="text-gray-500 max-w-xl">Seguí la acción desde la cancha. Marcadores en vivo, próximos partidos y resultados completos del torneo.</p>
+  <!-- Header -->
+  <header
+    class="bg-surface dark:bg-surface-dim docked full-width top-0 sticky z-50 shadow-sm border-b border-outline-variant dark:border-outline">
+    <div
+      class="flex justify-between items-center px-margin-mobile lg:px-margin-desktop h-20 w-full max-w-container-max mx-auto">
+      <div class="flex items-center gap-stack-sm">
+        <a href="index.html"
+          class="font-display-xl-mobile lg:font-display-xl text-headline-lg-mobile lg:text-headline-lg font-black text-primary dark:text-primary-fixed italic tracking-tighter whitespace-nowrap">
+          FIFA WORLD CUP 2026
+        </a>
       </div>
-
-      <!-- Botones de filtro: cada uno tiene data-filter, leído por matches.js -->
-      <div class="flex gap-2 flex-wrap">
-        <button class="filter-btn bg-gray-100 text-gray-600 font-semibold text-sm px-4 py-2 rounded-full transition" data-filter="scheduled">Programados</button>
-        <button class="filter-btn bg-gray-100 text-gray-600 font-semibold text-sm px-4 py-2 rounded-full transition" data-filter="live">
-          <span class="inline-block w-2 h-2 bg-red-500 rounded-full mr-1"></span>En Vivo
+      <nav class="hidden lg:flex gap-gutter font-label-sm">
+        <a class="nav-link text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1 font-label-sm text-label-sm uppercase active:scale-95 transition-transform duration-150" href="index.html">Inicio</a>
+        <a class="nav-link text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all px-2 py-1 rounded" href="matches/matches.html">Partidos</a>
+        <a class="nav-link text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all px-2 py-1 rounded" href="groups/groups.html">Grupos</a>
+        <a class="nav-link text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all px-2 py-1 rounded" href="knockout/knockout.html">Eliminatorias</a>
+        <a class="nav-link text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm uppercase hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-all px-2 py-1 rounded" href="stats/stats.html">Estadísticas</a>
+      </nav>
+      <div class="flex items-center gap-stack-sm">
+        <button class="lg:hidden text-on-surface-variant hover:text-primary transition-colors focus:outline-none p-2" id="open-menu">
+          <span class="material-symbols-outlined text-3xl">menu</span>
         </button>
-        <button class="filter-btn bg-gray-100 text-gray-600 font-semibold text-sm px-4 py-2 rounded-full transition" data-filter="finished">Finalizados</button>
-        <button class="filter-btn bg-indigo-100 text-indigo-700 font-semibold text-sm px-4 py-2 rounded-full transition" data-filter="all">Todos</button>
+        <button class="hidden lg:block gradient-btn text-on-primary px-4 py-2 rounded-lg font-label-sm text-label-sm uppercase ml-4">Entradas</button>
       </div>
     </div>
+  </header>
 
-    <!-- js/matches.js llena esta grilla dinámicamente -->
-    <div id="matches-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow">
+
+    <!-- Hero -->
+    <section class="relative w-full h-[600px] md:h-[700px] flex items-center justify-center overflow-hidden">
+      <div class="absolute inset-0 z-0 bg-cover bg-center"
+        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQ6Zbf5MfT6dKqE-xmAJXtJrwtrlCL8RiM1xL6722lX1rHMu6Sd1rijY0S5jRUOOHyfZjooBSPEq7ICH8NPF5rxcJ1D7tZRMHG6Pt0Fv0x-1JEGbpLeE2riG4b_Am5rRPegTjOMnzq9YgEVDHfwCo0Ofg0LaG0d7cToTpmbS-w8re_eWTfMN9d_qB15zAaI7ZV83k35qcvAino2PGVTlJjPufq_2ka8RwYYFQrjRjgmnHU9Hb4HCfGPWudoebayBPKCinrUGcN6RE')">
+      </div>
+      <div class="absolute inset-0 z-10 bg-gradient-to-t from-background via-inverse-surface/60 to-inverse-surface/30">
+      </div>
+      <div class="relative z-20 text-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mt-20">
+        <h1
+          class="font-display-xl-mobile md:font-display-xl text-display-xl-mobile md:text-display-xl font-black text-on-primary italic tracking-tighter mb-stack-md drop-shadow-lg uppercase"
+          style="color:white;text-shadow:rgba(0,0,0,0.8)0px 4px 20px,rgba(0,0,0,0.5)0px 0px 10px">
+          COPA MUNDIAL 2026: UNIDOS COMO UNO
+        </h1>
+        <p class="font-body-lg text-body-lg text-on-primary mb-stack-lg max-w-2xl mx-auto drop-shadow-md"
+          style="color:rgb(255,255,255);text-shadow:rgba(0,0,0,0.8)0px 2px 10px">
+          Vive la magnitud sin precedentes del primer torneo de 48 equipos en toda América del Norte. El viaje hacia
+          la gloria máxima comienza ahora.
+        </p>
+        <button
+          class="gradient-btn text-on-primary px-8 py-4 rounded-xl font-headline-md text-headline-md uppercase shadow-xl hover:shadow-2xl ring-2 ring-white/20">
+          Consigue tus Entradas
+        </button>
+      </div>
+    </section>
+
+    <!-- Bento Grid -->
+    <section
+      class="py-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full -mt-20 relative z-30">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+        <!-- Matches -->
+        <a href="matches/matches.html"
+          class="col-span-1 md:col-span-6 bg-surface border border-outline-variant rounded-xl p-stack-lg card-hover flex flex-col justify-between h-64 overflow-hidden relative group cursor-pointer">
+          <div
+            class="absolute inset-0 opacity-30 group-hover:opacity-40 transition-opacity duration-500 bg-cover bg-center"
+            style="background-image:url('https://lh3.googleusercontent.com/aida-public/AB6AXuA1g87pR8KkH67cvbAyS48UTp338EA-kWDNQpis89njs-Aokzzh2MURUOJTFIQYSTYOm5EAsatvccRBTQYeM3LTz6tAf-QgudpCDog8TnAX8SyhmdMl-9pnY8OoSogk3GJOuEYMXxE3rDLciR3jrDvcdTyYafdF4zt6RCiuGDUO_sh3Ab49plCJRIvMLGA1P3MTOtxUv0D1LgI735Zsej3_GFF1ISfYF-ZkzKr-nhg736bFOgZG3jrPNpKxRHtXQwSY6EjKX1siJLI')">
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent z-0"></div>
+          <div class="relative z-10">
+            <h2
+              class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-white mb-stack-sm uppercase"
+              style="text-shadow:0 2px 4px rgba(0,0,0,0.8)">Partidos</h2>
+            <p class="font-body-md text-body-md text-white" style="text-shadow:0 1px 3px rgba(0,0,0,0.8)">Consulta el
+              calendario completo, resultados y actualizaciones en vivo.</p>
+          </div>
+          <div class="relative z-10 self-end mt-auto">
+            <span class="material-symbols-outlined text-4xl text-white">sports_soccer</span>
+          </div>
+        </a>
+        <!-- Groups -->
+        <a href="groups/groups.html"
+          class="col-span-1 md:col-span-3 bg-surface border border-outline-variant rounded-xl p-stack-lg card-hover flex flex-col justify-between h-64 cursor-pointer">
+          <div>
+            <h2 class="font-headline-md text-headline-md font-bold text-primary mb-stack-sm uppercase">Grupos</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">Clasificaciones y análisis.</p>
+          </div>
+          <div class="self-end mt-auto bg-surface-container-low p-2 rounded-full">
+            <span class="material-symbols-outlined text-2xl text-primary">table_chart</span>
+          </div>
+        </a>
+        <!-- Knockout -->
+        <a href="knockout/knockout.html"
+          class="col-span-1 md:col-span-3 bg-surface border border-outline-variant rounded-xl p-stack-lg card-hover flex flex-col justify-between h-64 cursor-pointer">
+          <div>
+            <h2 class="font-headline-md text-headline-md font-bold text-primary mb-stack-sm uppercase">Eliminatorias</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">El camino hacia la final.</p>
+          </div>
+          <div class="self-end mt-auto bg-surface-container-low p-2 rounded-full">
+            <span class="material-symbols-outlined text-2xl text-primary">account_tree</span>
+          </div>
+        </a>
+        <!-- Stats -->
+        <a href="stats/stats.html"
+          class="col-span-1 md:col-span-12 bg-primary text-on-primary rounded-xl p-stack-lg card-hover flex flex-col md:flex-row justify-between items-center h-auto md:h-48 overflow-hidden relative cursor-pointer">
+          <div class="absolute inset-0 bg-gradient-to-r from-primary to-primary-container z-0"></div>
+          <div class="absolute right-0 top-0 h-full w-1/2 opacity-20 bg-cover bg-center"
+            style="background-image:url('https://lh3.googleusercontent.com/aida-public/AB6AXuAVqMSMmnLA64lF2srvt0j1JDtB1WgOUG5Kw8ajMwZ8dJ1uYw0cEK9uQsGoyNAGr4l-U7R6npk6HG_2wceJs_gcEYWQdzRre9p2bJtfeBhalXjo_nq45BzyEm3gfViO5gNf0j6LYwLR7rbdmWOAUNukQ6vAgC1nZvLw6lQwZNFUcNC-ZASH7w6Z4dRHAseqNuVYjh8LDjXgSecwJpFfdaZZUX7RPxvEZQZeApM_xGgpRJ8MrDNCn6zwJ33fBJzG7iX4ilNNntw20Z8')">
+          </div>
+          <div class="relative z-10 w-full md:w-1/2 text-left mb-stack-md md:mb-0">
+            <h2
+              class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold mb-stack-sm uppercase">
+              Estadísticas de Jugadores y Equipos</h2>
+            <p class="font-body-md text-body-md text-on-primary-container"
+              style="color:rgb(255,255,255);text-shadow:rgba(0,0,0,0.8)0px 2px 10px">
+              Profundiza en el análisis del deporte rey.</p>
+          </div>
+          <div
+            class="relative z-10 bg-on-primary text-primary px-6 py-3 rounded-lg font-label-sm text-label-sm uppercase font-bold flex items-center gap-2 hover:bg-surface-container-lowest transition-colors">
+            Explorar Datos
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="bg-gray-900 text-gray-400 mt-16">
-    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row justify-between gap-6">
-      <div>
-        <p class="font-display font-black text-white text-lg italic mb-2">FIFA WORLD CUP 2026</p>
-        <p class="text-sm">© 2026 Copa del Mundo FIFA. Todos los derechos reservados.</p>
-      </div>
-      <ul class="flex flex-wrap gap-6 text-sm">
-        <li><a href="#" class="hover:text-white">Política de Privacidad</a></li>
-        <li><a href="#" class="hover:text-white">Términos de Servicio</a></li>
-        <li><a href="#" class="hover:text-white">Contacto</a></li>
-      </ul>
+  <!-- Footer -->
+  <footer class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant full-width mt-stack-lg">
+    <div
+      class="flex flex-col md:flex-row justify-between items-center py-stack-lg px-margin-desktop w-full max-w-container-max mx-auto gap-gutter">
+      <div class="font-headline-md text-headline-md font-black text-white italic">FIFA WORLD CUP 2026</div>
+      <nav class="flex flex-wrap justify-center gap-stack-md">
+        <a class="text-inverse-on-surface/80 dark:text-on-surface/80 hover:text-tertiary-fixed transition-colors font-label-sm text-label-sm uppercase opacity-100 hover:opacity-80" href="#">Política de Privacidad</a>
+        <a class="text-inverse-on-surface/80 dark:text-on-surface/80 hover:text-tertiary-fixed transition-colors font-label-sm text-label-sm uppercase opacity-100 hover:opacity-80" href="#">Términos del Servicio</a>
+        <a class="text-inverse-on-surface/80 dark:text-on-surface/80 hover:text-tertiary-fixed transition-colors font-label-sm text-label-sm uppercase opacity-100 hover:opacity-80" href="#">Reglamento del Torneo</a>
+        <a class="text-inverse-on-surface/80 dark:text-on-surface/80 hover:text-tertiary-fixed transition-colors font-label-sm text-label-sm uppercase opacity-100 hover:opacity-80" href="#">Centro de Medios</a>
+        <a class="text-inverse-on-surface/80 dark:text-on-surface/80 hover:text-tertiary-fixed transition-colors font-label-sm text-label-sm uppercase opacity-100 hover:opacity-80" href="#">Contáctanos</a>
+      </nav>
+      <div
+        class="text-inverse-on-surface/80 dark:text-on-surface/80 font-body-md text-body-md text-center md:text-right">©
+        2026 Proyecto Educativo. Todos los derechos reservados. Grupo 4</div>
     </div>
   </footer>
 
-  <!-- Orden de carga: config -> flags -> api -> ui -> lógica de la página -->
-  <script src="js/config.js"></script>
-  <script src="js/flags.js"></script>
+  <script src="js/i18n/es/teams.js"></script>
+  <script src="js/i18n/es/enums.js"></script>
+  <script src="js/i18n/es/competition.js"></script>
+  <script src="js/i18n/es/ui.js"></script>
+  <script src="js/i18n/es/index.js"></script>
+  <script src="js/i18n/i18n.js"></script>
+  <script src="js/menu.js"></script>
   <script src="js/api.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/matches.js"></script>
+  <script src="js/home.js"></script>
 </body>
+
 </html>
