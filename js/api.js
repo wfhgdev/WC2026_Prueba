@@ -5,21 +5,21 @@
 
 const API_CONFIG = {
   proxyUrl: (function() {
-    // Auto-detect environment: Vercel (no PHP) vs PHP host
+    // Detectar entorno: Vercel (sin PHP) vs hosting con PHP
     var hostname = window.location.hostname;
     if (hostname.indexOf('vercel.app') !== -1) {
       return '/api/proxy';
     }
-    // Auto-detect proxy path based on this script's location
+    // Detectar ruta del proxy según la ubicación del script
     var scripts = document.getElementsByTagName('script');
     for (var i = 0; i < scripts.length; i++) {
       var src = scripts[i].src;
       if (src && src.indexOf('api.js') !== -1) {
-        // Script is at <base>/js/api.js - go up one level for proxy.php
+        // Script está en <base>/js/api.js — subir un nivel para proxy.php
         return src.substring(0, src.lastIndexOf('/js/')) + '/proxy.php';
       }
     }
-    // Fallback: use root-relative path
+    // Fallback: ruta relativa a la raíz
     return '/proxy.php';
   })(),
   directUrl: 'https://api.football-data.org/v4',
@@ -154,13 +154,13 @@ function cleanupCache() {
  * Con caché de respuestas de 5 minutos
  * Estrategia:
  * 1. Verificar caché (localStorage)
- * 2. Si la caché está vacía — probar proxy.php (método principal — resuelve CORS)
+ * 2. Si la caché está vacía — probar proxy (resuelve CORS)
  * 3. Si el proxy falla — probar fetch directo (como plan de respaldo)
  * 4. Guardar respuesta exitosa en caché
  *
  * IMPORTANTE: football-data.org devuelve la cabecera CORS Access-Control-Allow-Origin: http://localhost,
- * por lo que el fetch directo desde el dominio worldcup2026.na4u.ru NO FUNCIONA.
- * Usamos PHP-proxy como método principal.
+ * por lo que el fetch directo desde un dominio externo NO FUNCIONA.
+ * Usamos proxy.php (PHP) o /api/proxy (Vercel) como método principal.
  */
 async function fetchApi(endpoint) {
   // === Paso 1: Verificar caché ===
