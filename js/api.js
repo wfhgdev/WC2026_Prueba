@@ -5,6 +5,11 @@
 
 const API_CONFIG = {
   proxyUrl: (function() {
+    // Auto-detect environment: Vercel (no PHP) vs PHP host
+    var hostname = window.location.hostname;
+    if (hostname.indexOf('vercel.app') !== -1) {
+      return '/api/proxy';
+    }
     // Auto-detect proxy path based on this script's location
     var scripts = document.getElementsByTagName('script');
     for (var i = 0; i < scripts.length; i++) {
