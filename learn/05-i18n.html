@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>05 · i18n - Aprende WC2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet"/>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; }
+    code { background: #f2ecf4; padding: 0.1em 0.3em; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #1d1b20; color: #fdf7ff; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.85em; line-height: 1.6; }
+    .lang-btn { transition: all 0.2s ease; }
+  </style>
+</head>
+<body class="bg-[#fdf7ff] text-[#1d1b20] min-h-screen flex flex-col">
+  <header class="bg-white border-b border-[#cbc4d2] sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
+      <a href="index.html" class="font-['Montserrat'] text-lg font-black text-[#4f378a] italic tracking-tighter">← Volver</a>
+      <span class="text-sm text-[#494551]">05 / 12</span>
+      <button id="lang-toggle" class="lang-btn bg-[#4f378a] text-white text-xs px-3 py-1.5 rounded-full font-semibold">🇬🇧 English</button>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+    <div class="explanation-es">
+      <h1 class="text-3xl font-black text-[#4f378a] mb-6">🌐 Internacionalización (i18n)</h1>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">¿Qué es i18n?</h2>
+        <p class="mb-3">i18n es la abreviatura de <strong>internacionalización</strong> (hay 18 letras entre la i y la n). Es un sistema que permite que una aplicación web se muestre en <strong>diferentes idiomas</strong>.</p>
+        <p class="mb-3">En nuestro proyecto, todo el texto de la interfaz está en <strong>español</strong>. Los nombres de los equipos ("Brazil" → "Brasil"), los estados de los partidos ("FINISHED" → "Finalizado"), las fechas, etc.</p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">¿Cómo funciona?</h2>
+        <p class="mb-3">El sistema i18n funciona con <strong>diccionarios</strong>. Un diccionario es un objeto JavaScript que asocia una clave (en inglés) con un valor (en español):</p>
+        <pre>window.__TEAMS_ES = {
+  BRA: 'Brasil',
+  ARG: 'Argentina',
+  ESP: 'España',
+  // ... más de 200 equipos
+};</pre>
+        <p class="mt-3">Luego, una función <code>t(clave)</code> busca la clave en el diccionario y devuelve el valor en español:</p>
+        <pre>function t(key) {
+  return dict[key] || key; // Si no encuentra, devuelve la clave
+}
+
+t('BRA'); // "Brasil"
+t('HELLO'); // "HELLO" (no está en el diccionario)</pre>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">Los Archivos de Traducción</h2>
+        <p class="mb-3">Hay 4 archivos de diccionario en <code>js/i18n/es/</code>:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>teams.js</strong> — Nombres de equipos por código FIFA (BRA, ARG, ESP...)</li>
+          <li><strong>enums.js</strong> — Estados (SCHEDULED, IN_PLAY, FINISHED), etapas (FINAL, SEMI_FINALS), prefijo de grupo</li>
+          <li><strong>competition.js</strong> — Términos de la competición (WORLD_CUP, SEASON, TOURNAMENT)</li>
+          <li><strong>ui.js</strong> — Textos de la interfaz (HOME, MATCHES, LOADING, ERROR...)</li>
+        </ul>
+        <p class="mt-2">Luego <code>index.js</code> combina los 4 diccionarios en uno solo: <code>window.__DICT</code></p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">El Archivo i18n.js — El Motor</h2>
+        <p class="mb-3">El archivo <code>js/i18n/i18n.js</code> contiene el "motor" de traducción. Expone un objeto global <code>i18n</code> con estas funciones principales:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><code>t(clave)</code> — Traduce una clave genérica</li>
+          <li><code>translateTeam(equipo)</code> — Traduce el nombre de un equipo (por TLA o nombre)</li>
+          <li><code>translateStatus(estado)</code> — Traduce el estado de un partido</li>
+          <li><code>translateStage(etapa)</code> — Traduce el nombre de una etapa (Semi_finals → Semifinales)</li>
+          <li><code>translateGroup(grupo)</code> — Traduce un grupo ("Grupo A", "Grupo 1")</li>
+          <li><code>formatDate(fecha)</code> — Formatea una fecha en español ("lunes, 15 de junio de 2026")</li>
+          <li><code>formatTime(fecha)</code> — Formatea la hora ("21:00")</li>
+          <li><code>getRelativeDay(fecha)</code> — Dice "Hoy", "Mañana", "Ayer" o la fecha</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">El Mapa NAME_TO_TLA</h2>
+        <p class="mb-3">A veces la API devuelve el nombre del equipo en inglés ("Brazil", "Argentina") en lugar del código de 3 letras (BRA, ARG).</p>
+        <p class="mb-3">El <strong>NAME_TO_TLA</strong> es un mapa que convierte nombres en inglés a códigos FIFA:</p>
+        <pre>var NAME_TO_TLA = {
+  'Brazil': 'BRA',
+  'Argentina': 'ARG',
+  'Spain': 'ESP',
+  'United States': 'USA',
+  'Côte d\'Ivoire': 'CIV'
+};</pre>
+        <p class="mt-2">Así podemos buscar cualquier equipo por su nombre y obtener su traducción al español.</p>
+      </section>
+    </div>
+
+    <div class="explanation-en hidden">
+      <h1 class="text-3xl font-black text-[#4f378a] mb-6">🌐 Internationalization (i18n)</h1>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">What is i18n?</h2>
+        <p class="mb-3">i18n is short for <strong>internationalization</strong> (there are 18 letters between i and n). It's a system that allows a web application to display in <strong>different languages</strong>.</p>
+        <p class="mb-3">In our project, all interface text is in <strong>Spanish</strong>. Team names ("Brazil" → "Brasil"), match statuses ("FINISHED" → "Finalizado"), dates, etc.</p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">How does it work?</h2>
+        <p class="mb-3">The i18n system uses <strong>dictionaries</strong>. A dictionary is a JavaScript object that maps a key (in English) to a value (in Spanish):</p>
+        <pre>window.__TEAMS_ES = {
+  BRA: 'Brasil',
+  ARG: 'Argentina',
+  ESP: 'España',
+  // ... more than 200 teams
+};</pre>
+        <p class="mt-3">Then a <code>t(key)</code> function looks up the key in the dictionary and returns the Spanish value:</p>
+        <pre>function t(key) {
+  return dict[key] || key; // If not found, return the key
+}
+
+t('BRA'); // "Brasil"
+t('HELLO'); // "HELLO" (not in dictionary)</pre>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">Translation Files</h2>
+        <p class="mb-3">There are 4 dictionary files in <code>js/i18n/es/</code>:</p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>teams.js</strong> — Team names by FIFA code (BRA, ARG, ESP...)</li>
+          <li><strong>enums.js</strong> — Statuses (SCHEDULED, IN_PLAY, FINISHED), stages (FINAL, SEMI_FINALS), group prefix</li>
+          <li><strong>competition.js</strong> — Competition terms (WORLD_CUP, SEASON, TOURNAMENT)</li>
+          <li><strong>ui.js</strong> — Interface texts (HOME, MATCHES, LOADING, ERROR...)</li>
+        </ul>
+        <p class="mt-2">Then <code>index.js</code> combines the 4 dictionaries into one: <code>window.__DICT</code></p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">The i18n.js File — The Engine</h2>
+        <p class="mb-3">The <code>js/i18n/i18n.js</code> file contains the translation "engine". It exposes a global <code>i18n</code> object with these main functions:</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><code>t(key)</code> — Translates a generic key</li>
+          <li><code>translateTeam(team)</code> — Translates a team name (by TLA or name)</li>
+          <li><code>translateStatus(status)</code> — Translates a match status</li>
+          <li><code>translateStage(stage)</code> — Translates a stage name</li>
+          <li><code>translateGroup(group)</code> — Translates a group ("Grupo A", "Grupo 1")</li>
+          <li><code>formatDate(date)</code> — Formats a date in Spanish</li>
+          <li><code>formatTime(date)</code> — Formats time ("21:00")</li>
+          <li><code>getRelativeDay(date)</code> — Says "Hoy", "Mañana", "Ayer" or the date</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">The NAME_TO_TLA Map</h2>
+        <p class="mb-3">Sometimes the API returns the team name in English ("Brazil", "Argentina") instead of the 3-letter code (BRA, ARG).</p>
+        <p class="mb-3">The <strong>NAME_TO_TLA</strong> is a map that converts English names to FIFA codes:</p>
+        <pre>var NAME_TO_TLA = {
+  'Brazil': 'BRA',
+  'Argentina': 'ARG',
+  'Spain': 'ESP',
+  'United States': 'USA',
+  'Côte d\'Ivoire': 'CIV'
+};</pre>
+        <p class="mt-2">This way we can look up any team by its name and get its Spanish translation.</p>
+      </section>
+    </div>
+
+    <div class="flex justify-between mt-10 pt-6 border-t border-[#cbc4d2]">
+      <a href="04-cache.html" class="text-[#4f378a] font-semibold hover:underline">← Anterior: Caché</a>
+      <a href="06-home.html" class="bg-[#4f378a] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#6750a4] transition">Siguiente: Página de Inicio →</a>
+    </div>
+  </main>
+  <footer class="bg-[#322f35] text-white py-4 px-4 mt-8">
+    <div class="max-w-4xl mx-auto text-center text-xs opacity-70">© 2026 Proyecto Educativo</div>
+  </footer>
+  <script src="js/learn.js"></script>
+</body>
+</html>

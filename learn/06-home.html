@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>06 · Inicio - Aprende WC2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet"/>
+  <style>body{font-family:'Inter',sans-serif}h1,h2,h3,h4{font-family:'Montserrat',sans-serif}code{background:#f2ecf4;padding:.1em .3em;border-radius:4px;font-size:.9em}pre{background:#1d1b20;color:#fdf7ff;padding:1rem;border-radius:8px;overflow-x:auto;font-size:.85em;line-height:1.6}.lang-btn{transition:all .2s ease}</style>
+</head>
+<body class="bg-[#fdf7ff] text-[#1d1b20] min-h-screen flex flex-col">
+  <header class="bg-white border-b border-[#cbc4d2] sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
+      <a href="index.html" class="font-['Montserrat'] text-lg font-black text-[#4f378a] italic tracking-tighter">← Volver</a>
+      <span class="text-sm text-[#494551]">06 / 12</span>
+      <button id="lang-toggle" class="lang-btn bg-[#4f378a] text-white text-xs px-3 py-1.5 rounded-full font-semibold">🇬🇧 English</button>
+    </div>
+  </header>
+  <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+    <div class="explanation-es">
+      <h1 class="text-3xl font-black text-[#4f378a] mb-6">🏠 Página de Inicio</h1>
+      <section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">Estructura General</h2>
+      <p class="mb-3">La página de inicio (<code>index.html</code>) tiene 3 partes principales:</p>
+      <ul class="list-disc pl-6 space-y-1"><li><strong>Header</strong> — Barra superior con logo, menú de navegación (escritorio) y botón hamburguesa (móvil)</li><li><strong>Main</strong> — Una sección Hero (imagen grande con texto) y un Bento Grid (cuadrícula de tarjetas)</li><li><strong>Footer</strong> — Información legal y enlaces secundarios</li></ul></section>
+      <section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">Hero Section</h2>
+      <p class="mb-3">El Hero es la primera impresión del sitio. Tiene:</p>
+      <ul class="list-disc pl-6 space-y-1"><li>Una <strong>imagen de fondo</strong> grande (de la Copa Mundial)</li><li>Un <strong>gradiente oscuro</strong> encima para que el texto sea legible</li><li>El título "COPA MUNDIAL 2026: UNIDOS COMO UNO"</li><li>Un botón "Consigue tus Entradas"</li></ul>
+      <pre><section class="relative w-full h-[600px]">
+  <div class="absolute inset-0 bg-cover bg-center"
+    style="background-image: url('...')"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-background ..."></div>
+  <div class="relative z-20 text-center">
+    <h1>COPA MUNDIAL 2026: UNIDOS COMO UNO</h1>
+    <button>Consigue tus Entradas</button>
+  </div>
+</section></pre></section>
+      <section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">Bento Grid</h2>
+      <p class="mb-3">El Bento Grid es una <strong>cuadrícula de tarjetas</strong> que enlazan a las 4 secciones principales. Usa CSS Grid de Tailwind:</p>
+      <pre><div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+  <!-- Partidos: ocupa 6 columnas -->
+  <a href="matches/matches.html" class="col-span-6">...</a>
+  <!-- Grupos: ocupa 3 columnas -->
+  <a href="groups/groups.html" class="col-span-3">...</a>
+  <!-- Eliminatorias: ocupa 3 columnas -->
+  <a href="knockout/knockout.html" class="col-span-3">...</a>
+  <!-- Estadísticas: ocupa 12 columnas (ancho completo) -->
+  <a href="stats/stats.html" class="col-span-12">...</a>
+</div></pre>
+      <p class="mt-2">Cada tarjeta tiene un icono, título, descripción y un efecto hover que la eleva ligeramente.</p></section>
+    </div>
+    <div class="explanation-en hidden">
+      <h1 class="text-3xl font-black text-[#4f378a] mb-6">🏠 Home Page</h1>
+      <section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">General Structure</h2>
+      <p class="mb-3">The home page (<code>index.html</code>) has 3 main parts:</p>
+      <ul class="list-disc pl-6 space-y-1"><li><strong>Header</strong> — Top bar with logo, desktop nav menu, hamburger button (mobile)</li><li><strong>Main</strong> — Hero section (large image with text) and Bento Grid (card grid)</li><li><strong>Footer</strong> — Legal info and secondary links</li></ul></section>
+      <section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">Hero Section</h2>
+      <p class="mb-3">The Hero is the site's first impression. It has:</p>
+      <ul class="list-disc pl-6 space-y-1"><li>A large <strong>background image</strong> (from the World Cup)</li><li>A <strong>dark gradient</strong> overlay for text readability</li><li>The title "COPA MUNDIAL 2026: UNIDOS COMO UNO"</li><li>A "Get Tickets" button</li></ul></section>
+      <section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">Bento Grid</h2>
+      <p class="mb-3">The Bento Grid is a <strong>card grid</strong> linking to the 4 main sections. It uses Tailwind's CSS Grid:</p>
+      <p class="mt-2">Each card has an icon, title, description, and a hover effect that lifts it slightly.</p></section>
+    </div>
+    <div class="flex justify-between mt-10 pt-6 border-t border-[#cbc4d2]">
+      <a href="05-i18n.html" class="text-[#4f378a] font-semibold hover:underline">← Anterior: i18n</a>
+      <a href="07-matches.html" class="bg-[#4f378a] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#6750a4] transition">Siguiente: Partidos →</a>
+    </div>
+  </main>
+  <footer class="bg-[#322f35] text-white py-4 px-4 mt-8"><div class="max-w-4xl mx-auto text-center text-xs opacity-70">© 2026 Proyecto Educativo</div></footer>
+  <script src="js/learn.js"></script>
+</body>
+</html>

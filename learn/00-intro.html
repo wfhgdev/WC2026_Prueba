@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>00 · Introducción - Aprende WC2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet"/>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1,h2,h3,h4 { font-family: 'Montserrat', sans-serif; }
+    code { background: #f2ecf4; padding: 0.1em 0.3em; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #1d1b20; color: #fdf7ff; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.85em; line-height: 1.6; }
+    .lang-btn { transition: all 0.2s ease; }
+    .lang-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(79,55,138,0.3); }
+    .nav-link { transition: color 0.2s; }
+    .nav-link:hover { color: #4f378a; }
+  </style>
+</head>
+<body class="bg-[#fdf7ff] text-[#1d1b20] min-h-screen flex flex-col">
+  <!-- Top bar -->
+  <header class="bg-white border-b border-[#cbc4d2] sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
+      <a href="index.html" class="font-['Montserrat'] text-lg font-black text-[#4f378a] italic tracking-tighter">← Volver</a>
+      <span class="text-sm text-[#494551]">00 / 12</span>
+      <button id="lang-toggle" class="lang-btn bg-[#4f378a] text-white text-xs px-3 py-1.5 rounded-full font-semibold">🇬🇧 English</button>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+    <!-- SPANISH -->
+    <div class="explanation-es">
+      <h1 class="text-3xl font-black text-[#4f378a] mb-6">🌍 Introducción al Proyecto</h1>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">¿Qué es este proyecto?</h2>
+        <p class="mb-3">Es una <strong>aplicación web</strong> sobre la <strong>Copa Mundial FIFA 2026</strong>. Muestra información real del torneo: partidos, resultados, clasificaciones de grupos, el árbol de eliminatorias y estadísticas de jugadores y equipos.</p>
+        <p class="mb-3">Los datos vienen de una API externa llamada <code>football-data.org</code>, que provee información actualizada del fútbol mundial.</p>
+        <p>El proyecto fue creado con fines educativos — para aprender cómo se construye una web moderna usando solo HTML, CSS, JavaScript y un poco de PHP.</p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">Tecnologías Usadas</h2>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>HTML5</strong> — La estructura de las páginas (etiquetas, atributos, semántica)</li>
+          <li><strong>Tailwind CSS</strong> — Un framework de CSS que usa clases pequeñas y reutilizables en lugar de escribir CSS personalizado</li>
+          <li><strong>JavaScript (Vanilla)</strong> — JavaScript puro, sin frameworks como React o Vue. Usamos el DOM, fetch, async/await, localStorage</li>
+          <li><strong>PHP</strong> — Un pequeño archivo <code>proxy.php</code> que sirve como intermediario para llamar a la API</li>
+          <li><strong>API football-data.org</strong> — Una API REST que devuelve datos en formato JSON</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">Estructura de Archivos</h2>
+        <pre>
+📁 WC2026_Prueba/
+├── index.html              ← Página de inicio
+├── index.css               ← Estilos globales
+├── tailwindCustom.js       ← Configuración de Tailwind
+├── proxy.php               ← Proxy para la API
+├── 📁 js/
+│   ├── api.js              ← Conexión con la API
+│   ├── home.js             ← Lógica de la página de inicio
+│   ├── menu.js             ← Menú móvil
+│   └── 📁 i18n/            ← Traducciones al español
+├── 📁 matches/             ← Página de partidos
+├── 📁 groups/              ← Página de grupos
+├── 📁 knockout/            ← Página de eliminatorias
+├── 📁 stats/               ← Página de estadísticas
+└── 📁 learn/               ← ¡Este sitio educativo!</pre>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">¿Cómo funciona en resumen?</h2>
+        <ol class="list-decimal pl-6 space-y-2">
+          <li><strong>El navegador</strong> carga un archivo HTML (ej: <code>index.html</code>)</li>
+          <li><strong>El HTML</strong> incluye Tailwind CSS desde un CDN y nuestros archivos JavaScript</li>
+          <li><strong>JavaScript</strong> llama a <code>api.js</code> que obtiene datos de la API (a través del proxy PHP para evitar el problema CORS)</li>
+          <li><strong>Los datos</strong> se guardan en <code>localStorage</code> (caché) para no llamar la API cada vez</li>
+          <li><strong>Las funciones</strong> de cada página toman esos datos y crean elementos HTML dinámicamente (tarjetas de partidos, tablas de grupos, etc.)</li>
+          <li>Todo el texto de la interfaz está en <strong>español</strong> gracias al sistema de internacionalización (i18n)</li>
+        </ol>
+      </section>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="explanation-en hidden">
+      <h1 class="text-3xl font-black text-[#4f378a] mb-6">🌍 Project Introduction</h1>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">What is this project?</h2>
+        <p class="mb-3">It's a <strong>web application</strong> about the <strong>FIFA World Cup 2026</strong>. It shows real tournament information: matches, results, group standings, the knockout bracket, and player/team statistics.</p>
+        <p class="mb-3">The data comes from an external API called <code>football-data.org</code>, which provides up-to-date football information worldwide.</p>
+        <p>This project was created for educational purposes — to learn how to build a modern website using only HTML, CSS, JavaScript, and a little PHP.</p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">Technologies Used</h2>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>HTML5</strong> — The page structure (tags, attributes, semantics)</li>
+          <li><strong>Tailwind CSS</strong> — A CSS framework that uses small, reusable classes instead of writing custom CSS</li>
+          <li><strong>Vanilla JavaScript</strong> — Pure JavaScript, no frameworks like React or Vue. We use the DOM, fetch, async/await, localStorage</li>
+          <li><strong>PHP</strong> — A small <code>proxy.php</code> file that acts as an intermediary to call the API</li>
+          <li><strong>football-data.org API</strong> — A REST API that returns data in JSON format</li>
+        </ul>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">File Structure</h2>
+        <pre>
+📁 WC2026_Prueba/
+├── index.html              ← Home page
+├── index.css               ← Global styles
+├── tailwindCustom.js       ← Tailwind configuration
+├── proxy.php               ← API proxy
+├── 📁 js/
+│   ├── api.js              ← API connection
+│   ├── home.js             ← Home page logic
+│   ├── menu.js             ← Mobile menu
+│   └── 📁 i18n/            ← Spanish translations
+├── 📁 matches/             ← Matches page
+├── 📁 groups/              ← Groups page
+├── 📁 knockout/            ← Knockout page
+├── 📁 stats/               ← Stats page
+└── 📁 learn/               ← This educational site!</pre>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-[#4f378a] mb-3">How does it work (summary)?</h2>
+        <ol class="list-decimal pl-6 space-y-2">
+          <li><strong>The browser</strong> loads an HTML file (e.g. <code>index.html</code>)</li>
+          <li><strong>The HTML</strong> includes Tailwind CSS from a CDN and our JavaScript files</li>
+          <li><strong>JavaScript</strong> calls <code>api.js</code> which gets data from the API (through the PHP proxy to avoid CORS issues)</li>
+          <li><strong>The data</strong> is saved in <code>localStorage</code> (cache) so we don't call the API every time</li>
+          <li><strong>The functions</strong> on each page take that data and create HTML elements dynamically (match cards, group tables, etc.)</li>
+          <li>All interface text is in <strong>Spanish</strong> thanks to the i18n system</li>
+        </ol>
+      </section>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex justify-between mt-10 pt-6 border-t border-[#cbc4d2]">
+      <a href="index.html" class="text-[#4f378a] font-semibold hover:underline">← Dashboard</a>
+      <a href="01-html-css-tailwind.html" class="bg-[#4f378a] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#6750a4] transition">Siguiente: HTML, CSS & Tallwind →</a>
+    </div>
+  </main>
+
+  <footer class="bg-[#322f35] text-white py-4 px-4 mt-8">
+    <div class="max-w-4xl mx-auto text-center text-xs opacity-70">© 2026 Proyecto Educativo</div>
+  </footer>
+
+  <script src="js/learn.js"></script>
+</body>
+</html>

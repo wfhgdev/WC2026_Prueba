@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>10 · Estadísticas - Aprende WC2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet"/>
+<style>body{font-family:'Inter',sans-serif}h1,h2,h3,h4{font-family:'Montserrat',sans-serif}code{background:#f2ecf4;padding:.1em .3em;border-radius:4px;font-size:.9em}pre{background:#1d1b20;color:#fdf7ff;padding:1rem;border-radius:8px;overflow-x:auto;font-size:.85em;line-height:1.6}.lang-btn{transition:all .2s ease}</style>
+</head>
+<body class="bg-[#fdf7ff] text-[#1d1b20] min-h-screen flex flex-col">
+<header class="bg-white border-b border-[#cbc4d2] sticky top-0 z-50">
+<div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
+<a href="index.html" class="font-['Montserrat'] text-lg font-black text-[#4f378a] italic tracking-tighter">← Volver</a>
+<span class="text-sm text-[#494551]">10 / 12</span>
+<button id="lang-toggle" class="lang-btn bg-[#4f378a] text-white text-xs px-3 py-1.5 rounded-full font-semibold">🇬🇧 English</button>
+</div></header>
+<main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+<div class="explanation-es">
+<h1 class="text-3xl font-black text-[#4f378a] mb-6">📈 Página de Estadísticas</h1>
+
+<section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">¿Qué hace esta página?</h2>
+<p class="mb-3">Muestra 3 paneles de estadísticas del torneo:</p>
+<ul class="list-disc pl-6 space-y-1">
+<li><strong>Máximos Goleadores</strong> — Lista de jugadores con más goles (con avatar, nombre, equipo, nacionalidad)</li>
+<li><strong>Más Goles Marcados</strong> — Equipos con más goles a favor (ordenados descendente)</li>
+<li><strong>Goles Recibidos</strong> — Equipos con más goles en contra</li>
+</ul></section>
+
+<section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">Máximos Goleadores</h2>
+<p class="mb-3">Los datos vienen del endpoint <code>/competitions/WC/scorers</code>. Cada goleador muestra:</p>
+<ul class="list-disc pl-6 space-y-1">
+<li><strong>Avatar</strong> — Un círculo con la inicial del jugador (hecho con CSS, no imagen)</li>
+<li><strong>Nombre</strong> del jugador</li>
+<li><strong>Equipo</strong> y nacionalidad (traducidos al español)</li>
+<li><strong>Número de goles</strong> destacado en color primario</li>
+</ul>
+<pre>displayScorers.forEach((s, i) => {
+  item.innerHTML = `
+    <div class="w-8 h-8 rounded-full ... flex items-center justify-center">
+      ${s.player.name.charAt(0).toUpperCase()}
+    </div>
+    <p>${s.player.name}</p>
+    <p>${teamName} · ${nationality}</p>
+    <span>${s.goals}</span>
+  `;
+});</pre></section>
+
+<section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">Toggle "Ver Más / Ver Menos"</h2>
+<p class="mb-3">Inicialmente solo se muestran <strong>5 goleadores</strong>. Hay un botón "Ver Clasificación Completa" que muestra todos. Al hacer clic de nuevo, vuelve a mostrar solo 5.</p>
+<pre>let showAllScorers = false;
+const SCORERS_INITIAL = 5;
+
+function renderScorers(container) {
+  const displayScorers = showAllScorers
+    ? allScorersData          // Todos
+    : allScorersData.slice(0, SCORERS_INITIAL); // Solo 5
+  // ...
+}
+
+function toggleScorers() {
+  showAllScorers = !showAllScorers;
+  renderScorers(scorersList);
+}</pre></section>
+
+<section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">Ranking de Equipos</h2>
+<p class="mb-3">Los datos de equipos vienen del endpoint <code>/competitions/WC/standings</code>. Recorremos todos los grupos y recopilamos las estadísticas de cada equipo:</p>
+<pre>const allTeams = [];
+(standingsData.standings || []).forEach(g => {
+  (g.table || []).forEach(row => {
+    allTeams.push(row);
+  });
+});
+
+// Top 5 equipos con más goles
+const topScoring = [...allTeams]
+  .sort((a, b) => b.goalsFor - a.goalsFor)
+  .slice(0, 5);
+
+// Top 5 equipos con más goles recibidos
+const mostConceded = [...allTeams]
+  .sort((a, b) => b.goalsAgainst - a.goalsAgainst)
+  .slice(0, 5);</pre>
+<p class="mt-2">Cada fila tiene el escudo del equipo, el nombre traducido y el número de goles.</p></section>
+</div>
+
+<div class="explanation-en hidden">
+<h1 class="text-3xl font-black text-[#4f378a] mb-6">📈 Stats Page</h1>
+<section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">What does this page do?</h2>
+<p class="mb-3">Shows 3 stats panels: <strong>Top Scorers</strong> (players with most goals), <strong>Most Goals Scored</strong> (teams with most goals for), <strong>Most Goals Conceded</strong> (teams with most goals against).</p></section>
+<section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">Top Scorers</h2>
+<p class="mb-3">Data from <code>/competitions/WC/scorers</code>. Each scorer shows: CSS avatar (initial letter in a circle), player name, translated team & nationality, goals count in primary color.</p></section>
+<section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">"Show More / Show Less" Toggle</h2>
+<p class="mb-3">Initially shows <strong>5 scorers</strong>. A button toggles between showing all and showing only 5.</p></section>
+<section class="mb-8"><h2 class="text-xl font-bold text-[#4f378a] mb-3">Team Rankings</h2>
+<p class="mb-3">Data from <code>/competitions/WC/standings</code>. We collect all teams from all groups, then sort by goals for (desc) and goals against (desc) to get the top 5 in each category.</p></section>
+</div>
+
+<div class="flex justify-between mt-10 pt-6 border-t border-[#cbc4d2]">
+<a href="09-knockout.html" class="text-[#4f378a] font-semibold hover:underline">← Anterior: Eliminatorias</a>
+<a href="11-mobile-menu.html" class="bg-[#4f378a] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#6750a4] transition">Siguiente: Menú Móvil →</a>
+</div></main>
+<footer class="bg-[#322f35] text-white py-4 px-4 mt-8"><div class="max-w-4xl mx-auto text-center text-xs opacity-70">© 2026 Proyecto Educativo</div></footer>
+<script src="js/learn.js"></script>
+</body>
+</html>
