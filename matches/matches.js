@@ -121,7 +121,7 @@ async function renderMatches(status = 'ALL') {
 
       // Team 1
       let team1Crest = match.homeTeam?.crest ? `<div class="w-14 h-14 rounded-full overflow-hidden border border-outline-variant shadow-sm bg-surface-container">
-        <img alt="${homeName}" class="w-full h-full object-cover crest-border" src="${match.homeTeam.crest}" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center font-bold text-on-surface-variant text-xs\\'>${homeCode}</div>'">
+        <img alt="${homeName}" class="w-full h-full object-cover" src="${match.homeTeam.crest}" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center font-bold text-on-surface-variant text-xs\\'>${homeCode}</div>'">
       </div>` : `<div class="w-14 h-14 rounded-full overflow-hidden border border-outline-variant shadow-sm bg-surface-container flex items-center justify-center font-bold text-on-surface-variant text-xs">${homeCode}</div>`;
 
       innerHTML += `
@@ -156,7 +156,7 @@ async function renderMatches(status = 'ALL') {
 
       // Team 2
       let team2Crest = match.awayTeam?.crest ? `<div class="w-14 h-14 rounded-full overflow-hidden border border-outline-variant shadow-sm bg-surface-container">
-        <img alt="${awayName}" class="w-full h-full object-cover crest-border" src="${match.awayTeam.crest}" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center font-bold text-on-surface-variant text-xs\\'>${awayCode}</div>'">
+        <img alt="${awayName}" class="w-full h-full object-cover" src="${match.awayTeam.crest}" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center font-bold text-on-surface-variant text-xs\\'>${awayCode}</div>'">
       </div>` : `<div class="w-14 h-14 rounded-full overflow-hidden border border-outline-variant shadow-sm bg-surface-container flex items-center justify-center font-bold text-on-surface-variant text-xs">${awayCode}</div>`;
 
       innerHTML += `
