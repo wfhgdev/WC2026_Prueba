@@ -1,7 +1,7 @@
 // ============================================
 // Vercel Serverless Proxy — Football-Data.org
 // ============================================
-// Equivalente a proxy.php para hosting sin PHP (Vercel)
+// Función serverless para Vercel (alternativa al proxy PHP tradicional)
 // ============================================
 
 export default async function handler(req, res) {
