@@ -302,7 +302,7 @@
               </div>
             </div>
 
-            <!-- Connectors Left R32 → Left R16 -->
+            <!-- Connectors Left R32 → Left QF -->
             <div class="w-16 relative hidden lg:block">
               <div class="absolute top-[15%] right-0 w-full h-[25%] bracket-line rounded-r-lg"></div>
               <div class="absolute top-[27.5%] right-[-1rem] w-4 border-t-2 border-outline-variant"></div>
@@ -310,7 +310,7 @@
               <div class="absolute top-[77.5%] right-[-1rem] w-4 border-t-2 border-outline-variant"></div>
             </div>
 
-            <!-- Left: Round of 16 -->
+            <!-- Left: Quarter Finals -->
             <div class="flex flex-col justify-around w-64 gap-stack-lg z-10">
               <div class="font-headline-md text-headline-md text-primary text-center mb-stack-md uppercase border-b-2 border-primary pb-2">cuartos de final</div>
                <!-- Match 5 (winner of 1 & 2) -->
@@ -357,10 +357,41 @@
               </div>
             </div>
 
-            <!-- Connectors Left R16 → Center Final -->
+            <!-- Connectors Left QF → Left SF -->
             <div class="w-16 relative hidden lg:block">
               <div class="absolute top-[28%] right-0 w-full h-[50%] bracket-line rounded-r-lg"></div>
               <div class="absolute top-[53%] right-[-1rem] w-4 border-t-2 border-outline-variant"></div>
+            </div>
+
+            <!-- Left: Semi Finals -->
+            <div class="flex flex-col justify-center w-64 gap-stack-lg z-10">
+              <div class="font-headline-md text-headline-md text-primary text-center mb-stack-md uppercase border-b-2 border-primary pb-2">semifinales</div>
+              <div class="match-card bg-surface-container-lowest border border-outline-variant rounded-lg p-3 shadow-sm hover:-translate-y-1 hover:border-b-2 hover:border-b-primary transition-all cursor-pointer relative group" data-match-id="13">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant match-info">Partido —</span>
+                  <span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded text-[10px] font-bold match-status"></span>
+                </div>
+                <div class="flex justify-between items-center py-1 border-b border-outline-variant/30 match-home">
+                  <div class="flex items-center gap-2">
+                    <img class="w-6 h-4 object-cover rounded-sm border border-outline-variant home-crest" src="" alt="">
+                    <span class="font-body-md text-body-md font-semibold home-name">—</span>
+                  </div>
+                  <span class="font-headline-md text-headline-md home-score"></span>
+                </div>
+                <div class="flex justify-between items-center py-1 match-away">
+                  <div class="flex items-center gap-2">
+                    <img class="w-6 h-4 object-cover rounded-sm border border-outline-variant away-crest" src="" alt="">
+                    <span class="font-body-md text-body-md away-name">—</span>
+                  </div>
+                  <span class="font-headline-md text-headline-md away-score"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Connectors Left SF → Center Final -->
+            <div class="w-16 relative hidden lg:block">
+              <div class="absolute top-[50%] right-0 w-1/2 border-t-2 border-outline-variant"></div>
+              <div class="absolute top-[50%] right-[-1rem] w-4 border-t-2 border-outline-variant"></div>
             </div>
 
             <!-- Center: Final -->
@@ -392,13 +423,44 @@
               </div>
             </div>
 
-            <!-- Connectors Right R16 → Center Final -->
+            <!-- Connectors Right SF → Center Final -->
+            <div class="w-16 relative hidden lg:block">
+              <div class="absolute top-[50%] left-0 w-1/2 border-t-2 border-outline-variant"></div>
+              <div class="absolute top-[50%] left-[-1rem] w-4 border-t-2 border-outline-variant"></div>
+            </div>
+
+            <!-- Right: Semi Finals -->
+            <div class="flex flex-col justify-center w-64 gap-stack-lg z-10">
+              <div class="font-headline-md text-headline-md text-primary text-center mb-stack-md uppercase border-b-2 border-primary pb-2">semifinales</div>
+              <div class="match-card bg-surface-container-lowest border border-outline-variant rounded-lg p-3 shadow-sm hover:-translate-y-1 hover:border-b-2 hover:border-b-primary transition-all cursor-pointer relative group" data-match-id="14">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="font-label-sm text-label-sm text-on-surface-variant match-info">Partido —</span>
+                  <span class="bg-surface-variant text-on-surface-variant px-2 py-0.5 rounded text-[10px] font-bold match-status"></span>
+                </div>
+                <div class="flex justify-between items-center py-1 border-b border-outline-variant/30 match-home">
+                  <div class="flex items-center gap-2">
+                    <img class="w-6 h-4 object-cover rounded-sm border border-outline-variant home-crest" src="" alt="">
+                    <span class="font-body-md text-body-md font-semibold home-name">—</span>
+                  </div>
+                  <span class="font-headline-md text-headline-md home-score"></span>
+                </div>
+                <div class="flex justify-between items-center py-1 match-away">
+                  <div class="flex items-center gap-2">
+                    <img class="w-6 h-4 object-cover rounded-sm border border-outline-variant away-crest" src="" alt="">
+                    <span class="font-body-md text-body-md away-name">—</span>
+                  </div>
+                  <span class="font-headline-md text-headline-md away-score"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Connectors Right QF → Right SF -->
             <div class="w-16 relative hidden lg:block">
               <div class="absolute top-[28%] left-0 w-full h-[50%] bracket-line-left rounded-l-lg"></div>
               <div class="absolute top-[53%] left-[-1rem] w-4 border-t-2 border-outline-variant"></div>
             </div>
 
-            <!-- Right: Round of 16 -->
+            <!-- Right: Quarter Finals -->
             <div class="flex flex-col justify-around w-64 gap-stack-lg z-10">
               <div class="font-headline-md text-headline-md text-primary text-center mb-stack-md uppercase border-b-2 border-primary pb-2">cuartos de final</div>
                <!-- Match 7 (winner of 9 & 10) -->
@@ -445,7 +507,7 @@
               </div>
             </div>
 
-            <!-- Connectors Right R16 → Right R32 -->
+            <!-- Connectors Right QF → Right R32 -->
             <div class="w-16 relative hidden lg:block">
               <div class="absolute top-[15%] left-0 w-full h-[25%] bracket-line-left rounded-l-lg"></div>
               <div class="absolute top-[27.5%] left-[-1rem] w-4 border-t-2 border-outline-variant"></div>

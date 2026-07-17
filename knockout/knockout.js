@@ -122,6 +122,11 @@ async function renderKnockout() {
     const leftQuarters = sortedQuarters.slice(0, 2);
     const rightQuarters = sortedQuarters.slice(2, 4);
 
+    // Split SEMI_FINALS: first 1 goes left, last 1 goes right
+    const sortedSemis = [...semis].sort((a, b) => new Date(a.utcDate) - new Date(b.utcDate));
+    const leftSemis = sortedSemis.slice(0, 1);
+    const rightSemis = sortedSemis.slice(1, 2);
+
     // Get the final match
     const finalMatch = finals[0] || null;
 
@@ -140,7 +145,9 @@ async function renderKnockout() {
       9: rightLast16[0] || null,  // Right R32 match 1
       10: rightLast16[1] || null, // Right R32 match 2
       11: rightLast16[2] || null, // Right R32 match 3
-      12: rightLast16[3] || null  // Right R32 match 4
+      12: rightLast16[3] || null, // Right R32 match 4
+      13: leftSemis[0] || null,   // Left SF
+      14: rightSemis[0] || null   // Right SF
     };
 
     // Fill each match card
