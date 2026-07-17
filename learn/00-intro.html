@@ -39,7 +39,7 @@
           <li><strong>HTML:</strong> elementos semánticos, atributos y accesibilidad básica <a class="source-link" href="../index.html" target="_blank">[Fuente: ../index.html]</a></li>
           <li><strong>CSS:</strong> estilos personalizados en <a class="source-link" href="../index.css" target="_blank">index.css</a> y clases de Tailwind <a class="source-link" href="../tailwindCustom.js" target="_blank">[Fuente: ../tailwindCustom.js]</a></li>
           <li><strong>JavaScript:</strong> DOM, eventos, async/await y fetch en <a class="source-link" href="../js/api.js" target="_blank">[Fuente: ../js/api.js]</a></li>
-          <li><strong>API:</strong> consumo de datos deportivos y proxy en <a class="source-link" href="../proxy.php" target="_blank">[Fuente: ../proxy.php]</a></li>
+          <li><strong>API:</strong> consumo de datos deportivos y proxy en <a class="source-link" href="../api/proxy.js" target="_blank">[Fuente: ../api/proxy.js]</a></li>
           <li><strong>Datos:</strong> cómo se transforman partidos, grupos, eliminatorias y estadísticas</li>
           <li><strong>i18n:</strong> textos en español e inglés desde <a class="source-link" href="../js/i18n/i18n.js" target="_blank">[Fuente: ../js/i18n/i18n.js]</a> y diccionarios en <a class="source-link" href="../js/i18n/es/" target="_blank">[Fuente: ../js/i18n/es/]</a></li>
         </ul>
@@ -67,7 +67,8 @@
 ├── index.html              # Página principal
 ├── index.css               # Estilos base del proyecto
 ├── tailwindCustom.js       # Configuración de Tailwind
-├── proxy.php              # Proxy para evitar CORS
+├── api/
+│   └── proxy.js           # Proxy serverless para evitar CORS
 ├── js/
 │   ├── api.js             # fetch, cache TTL 5 min
 │   ├── home.js            # lógica página principal
@@ -160,7 +161,7 @@
           <li><strong>HTML semantics</strong> and accessible markup <a class="source-link" href="../index.html" target="_blank">[Source: ../index.html]</a></li>
           <li><strong>CSS</strong>: custom styles in <a class="source-link" href="../index.css" target="_blank">index.css</a> and Tailwind utilities <a class="source-link" href="../tailwindCustom.js" target="_blank">[Source: ../tailwindCustom.js]</a></li>
           <li><strong>JavaScript</strong>: DOM, events, async/await, fetch in <a class="source-link" href="../js/api.js" target="_blank">[Source: ../js/api.js]</a></li>
-          <li><strong>API integration</strong>: external data and proxy in <a class="source-link" href="../proxy.php" target="_blank">[Source: ../proxy.php]</a></li>
+          <li><strong>API integration</strong>: external data and proxy in <a class="source-link" href="../api/proxy.js" target="_blank">[Source: ../api/proxy.js]</a></li>
           <li><strong>Data flow</strong>: matches, groups, knockout, stats rendering</li>
           <li><strong>i18n</strong>: English/Spanish strings in <a class="source-link" href="../js/i18n/i18n.js" target="_blank">[Source: ../js/i18n/i18n.js]</a></li>
         </ul>
@@ -172,7 +173,8 @@
 ├── index.html
 ├── index.css
 ├── tailwindCustom.js
-├── proxy.php
+├── api/
+│   └── proxy.js
 ├── js/
 │   ├── api.js
 │   ├── home.js

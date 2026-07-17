@@ -10,17 +10,8 @@ const API_CONFIG = {
     if (hostname.indexOf('vercel.app') !== -1) {
       return '/api/proxy';
     }
-    // Detectar ruta del proxy según la ubicación del script
-    var scripts = document.getElementsByTagName('script');
-    for (var i = 0; i < scripts.length; i++) {
-      var src = scripts[i].src;
-      if (src && src.indexOf('api.js') !== -1) {
-        // Script está en <base>/js/api.js — subir un nivel para proxy.php
-        return src.substring(0, src.lastIndexOf('/js/')) + '/proxy.php';
-      }
-    }
-    // Fallback: ruta relativa a la raíz
-    return '/proxy.php';
+    // Fallback: para desarrollo local o GitHub Pages usamos /api/proxy
+    return '/api/proxy';
   })(),
   directUrl: 'https://api.football-data.org/v4',
   token: '244ff96cf28140c8b82341ecff5239b8'
@@ -160,7 +151,7 @@ function cleanupCache() {
  *
  * IMPORTANTE: football-data.org devuelve la cabecera CORS Access-Control-Allow-Origin: http://localhost,
  * por lo que el fetch directo desde un dominio externo NO FUNCIONA.
- * Usamos proxy.php (PHP) o /api/proxy (Vercel) como método principal.
+ * Usamos /api/proxy (Vercel Serverless Function) como método principal.
  */
 async function fetchApi(endpoint) {
   // === Paso 1: Verificar caché ===
@@ -169,17 +160,17 @@ async function fetchApi(endpoint) {
     return cached;
   }
 
-  // === Paso 2: Probar proxy.php (método principal) ===
+  // === Paso 2: Probar proxy serverless /api/proxy (método principal) ===
   let data = null;
   let fromProxy = false;
 
   try {
     const proxyResponse = await fetch(`${API_CONFIG.proxyUrl}?endpoint=${encodeURIComponent(endpoint)}`);
 
-    // Verificar que la respuesta sea JSON, no código PHP
+    // Verificar que la respuesta sea JSON
     const contentType = proxyResponse.headers.get('content-type') || '';
     if (!contentType.includes('application/json')) {
-      throw new Error(`El proxy devolvió contenido no-JSON (${contentType}). Es posible que PHP no esté disponible.`);
+      throw new Error(`El proxy devolvió contenido no-JSON (${contentType}). Es posible que la función serverless no esté disponible.`);
     }
 
     if (!proxyResponse.ok) {

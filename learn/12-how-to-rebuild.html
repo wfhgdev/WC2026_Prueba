@@ -36,7 +36,7 @@
         <ul class="list-disc pl-6 mt-2 space-y-1">
           <li><strong>PHP built-in server</strong> — php -S localhost:8000 — iniciar el servidor integrado de PHP para pruebas.</li>
           <li><strong>GitHub Pages</strong> — hosting gratuito para sitios estáticos. No soporta PHP.</li>
-          <li><strong>Serverless</strong> — funciones en la nube que se ejecutan sin servidor propio. Alternativa a proxy.php en la nube.</li>
+          <li><strong>Serverless</strong> — funciones en la nube que se ejecutan sin servidor propio. El proxy actual usa una función serverless (api/proxy.js).</li>
         </ul>
       </div>
 
@@ -49,7 +49,8 @@
 ├── index.html
 ├── index.css
 ├── tailwindCustom.js
-├── proxy.php
+├── api/
+│   └── proxy.js
 ├── js/
 │   ├── api.js
 │   ├── home.js
@@ -97,10 +98,19 @@
       </div>
 
       <div class="step">
-        <h3 class="font-bold text-[#4f378a]">Paso 5: Proxy PHP</h3>
-        <p>Crea <code>proxy.php</code> como intermediario. Fuente: <a class="source-link" href="../proxy.php" target="_blank">[Fuente: ../proxy.php]</a>.</p>
-        <pre>header('Content-Type: application/json');
-echo file_get_contents('https://api.football-data.org/v4' . $_GET['endpoint']);</pre>
+        <h3 class="font-bold text-[#4f378a]">Paso 5: Proxy (Serverless)</h3>
+        <p>Crea <code>api/proxy.js</code> como función serverless (para Vercel). Fuente: <a class="source-link" href="../api/proxy.js" target="_blank">[Fuente: ../api/proxy.js]</a>.</p>
+        <pre>export default async function handler(req, res) {
+  const endpoint = req.query.endpoint || '';
+  const token = process.env.API_TOKEN; // variable de entorno en Vercel
+  const url = 'https://api.football-data.org/v4' + endpoint;
+
+  const response = await fetch(url, {
+    headers: { 'X-Auth-Token': token }
+  });
+  const data = await response.json();
+  res.status(response.status).json(data);
+}</pre>
         <p><a class="source-link" href="https://developer.mozilla.org/es/docs/Web/HTTP/CORS" target="_blank">CORS — MDN ES</a> · <a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">CORS — MDN EN</a></p>
         <p class="mt-2"><a class="source-link" href="https://www.football-data.org/client/register" target="_blank">Obtener token football-data.org</a></p>
       </div>
@@ -136,8 +146,8 @@ echo file_get_contents('https://api.football-data.org/v4' . $_GET['endpoint']);<
 
       <div class="step">
         <h3 class="font-bold text-[#4f378a]">Paso 10: Probar localmente</h3>
-        <pre>php -S localhost:8000</pre>
-        <p class="mt-2">Abre <a class="source-link" href="http://localhost:8000" target="_blank">http://localhost:8000</a>.</p>
+        <pre>npx serve .</pre>
+        <p class="mt-2">Abre <a class="source-link" href="http://localhost:3000" target="_blank">http://localhost:3000</a>. O usa <code>python -m http.server 8000</code> si tienes Python.</p>
       </div>
 
       <div class="step">
@@ -156,7 +166,7 @@ echo file_get_contents('https://api.football-data.org/v4' . $_GET['endpoint']);<
         <ul class="list-disc pl-6 mt-2 space-y-1">
           <li><strong>PHP built-in server</strong> — php -S localhost:8000 — start PHP's built-in server for testing.</li>
           <li><strong>GitHub Pages</strong> — free static site hosting. Does not support PHP.</li>
-          <li><strong>Serverless</strong> — cloud functions that run without a dedicated server. Cloud alternative to proxy.php.</li>
+          <li><strong>Serverless</strong> — cloud functions that run without a dedicated server. The current proxy uses a serverless function (api/proxy.js).</li>
         </ul>
       </div>
 
@@ -185,8 +195,8 @@ echo file_get_contents('https://api.football-data.org/v4' . $_GET['endpoint']);<
       </div>
 
       <div class="step">
-        <h3 class="font-bold text-[#4f378a]">Step 5: PHP proxy</h3>
-        <p>See <a class="source-link" href="../proxy.php" target="_blank">proxy.php</a>. Get token at <a class="source-link" href="https://www.football-data.org/client/register" target="_blank">football-data.org</a></p>
+        <h3 class="font-bold text-[#4f378a]">Step 5: Proxy (Serverless)</h3>
+        <p>See <a class="source-link" href="../api/proxy.js" target="_blank">api/proxy.js</a>. Get token at <a class="source-link" href="https://www.football-data.org/client/register" target="_blank">football-data.org</a></p>
       </div>
 
       <div class="step">

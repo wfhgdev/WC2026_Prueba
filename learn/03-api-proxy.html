@@ -29,7 +29,7 @@
 
   <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
     <div class="explanation-es">
-      <h1 class="text-3xl font-black text-[#4f378a] mb-6">🔌 API & Proxy PHP</h1>
+      <h1 class="text-3xl font-black text-[#4f378a] mb-6">🔌 API & Proxy (JS / Serverless)</h1>
 
       <section class="mb-8">
         <h2 class="text-xl font-bold text-[#4f378a] mb-3">📖 Para principiantes: conceptos básicos</h2>
@@ -56,30 +56,30 @@
         </div>
 
         <div class="tip-box mb-4">
-          <strong>5. CORS</strong> — El navegador bloquea peticiones a otro dominio si éste no lo permite. El proxy PHP evita esto porque la petición va desde el servidor, no desde el navegador.
+          <strong>5. CORS</strong> — El navegador bloquea peticiones a otro dominio si éste no lo permite. El proxy evita esto porque la petición va desde el servidor, no desde el navegador.
         </div>
       </section>
 
       <section class="mb-8">
         <h2 class="text-xl font-bold text-[#4f378a] mb-3">¿Qué problema resuelve el proxy?</h2>
-        <p class="mb-3">El navegador bloquea peticiones a dominios distintos por seguridad (CORS). Nuestro proxy PHP recibe la petición, la reenvía a la API y devuelve la respuesta. Así el navegador solo ve tráfico a tu propio servidor. Código real: <a class="source-link" href="../proxy.php" target="_blank">[Fuente: ../proxy.php]</a>.</p>
+        <p class="mb-3">El navegador bloquea peticiones a dominios distintos por seguridad (CORS). Nuestro proxy recibe la petición, la reenvía a la API y devuelve la respuesta. Así el navegador solo ve tráfico a tu propio servidor. Código real: <a class="source-link" href="../api/proxy.js" target="_blank">[Fuente: ../api/proxy.js]</a>.</p>
         <p class="mt-3">Recurso: <a class="source-link" href="https://developer.mozilla.org/es/docs/Web/HTTP/CORS" target="_blank">MDN — CORS en español</a> · <a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">MDN — CORS EN</a>.</p>
       </section>
 
       <section class="mb-8">
         <h2 class="text-xl font-bold text-[#4f378a] mb-3">Flujo de una llamada</h2>
-        <pre>1. fetch('/proxy.php?endpoint=competitions/WC/matches')
-2. proxy.php recibe la petición
-3. Añade cabeceras (Content-Type, X-Auth-Token)
-4. Reenvía a api.football-data.org
-5. Devuelve la respuesta al navegador</pre>
+        <pre>1. fetch('/api/proxy?endpoint=competitions/WC/matches')
+2. La función serverless (api/proxy.js) recibe la petición
+3. Añade cabeceras (X-Auth-Token, User-Agent)
+4. Reenvía con fetch() a api.football-data.org/v4/...
+5. Devuelve la respuesta JSON al navegador</pre>
         <p class="mt-3">Las funciones de ayuda están en <a class="source-link" href="../js/api.js" target="_blank">[Fuente: ../js/api.js]</a>.</p>
         <p class="mt-3">Recurso: <a class="source-link" href="https://developer.mozilla.org/es/docs/Web/API/Fetch_API" target="_blank">MDN — Fetch ES</a> · <a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">MDN — Fetch EN</a>.</p>
       </section>
 
       <section class="mb-8">
         <h2 class="text-xl font-bold text-[#4f378a] mb-3">Seguridad: ocultar tokens</h2>
-        <p class="mb-3">El token se guarda en el servidor (proxy.php), no en el HTML. Si alguien ve tu HTML solo verá la llamada al proxy, no la clave secreta.</p>
+        <p class="mb-3">El token se guarda en el servidor (en la función serverless <code>api/proxy.js</code>), no en el HTML. Si alguien ve tu HTML solo verá la llamada al proxy, no la clave secreta.</p>
         <p class="mt-3">Recurso: <a class="source-link" href="https://developer.mozilla.org/es/docs/Web/Security" target="_blank">MDN — Seguridad web</a>.</p>
         <div class="tip-box mt-4">
           <strong>⚠️ Importante:</strong> nunca expongas tokens en el frontend. Úsalos solo en el servidor o en variables de entorno.
@@ -93,13 +93,13 @@
           <li><a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">CORS — MDN EN</a></li>
           <li><a class="source-link" href="https://developer.mozilla.org/es/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data" target="_blank">Peticiones con JS — MDN ES</a></li>
           <li><a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">Fetch API — MDN EN</a></li>
-          <li><a class="source-link" href="https://www.php.net/manual/es/book.curl.php" target="_blank">cURL en PHP — Manual oficial</a></li>
+          <li><a class="source-link" href="https://vercel.com/docs/functions/serverless-functions" target="_blank">Vercel Serverless Functions — Documentación oficial</a></li>
         </ul>
       </section>
     </div>
 
     <div class="explanation-en hidden">
-      <h1 class="text-3xl font-black text-[#4f378a] mb-6">🔌 API & Proxy PHP</h1>
+      <h1 class="text-3xl font-black text-[#4f378a] mb-6">🔌 API & Proxy (JS / Serverless)</h1>
 
       <section class="mb-8">
         <h2 class="text-xl font-bold text-[#4f378a] mb-3">📖 For beginners: basic concepts</h2>
@@ -126,30 +126,30 @@
         </div>
 
         <div class="tip-box mb-4">
-          <strong>5. CORS</strong> — The browser blocks requests to another domain if it doesn't allow it. The PHP proxy bypasses this because the request goes from the server, not the browser.
+          <strong>5. CORS</strong> — The browser blocks requests to another domain if it doesn't allow it. The proxy bypasses this because the request goes from the server, not the browser.
         </div>
       </section>
 
       <section class="mb-8">
         <h2 class="text-xl font-bold text-[#4f378a] mb-3">What problem does the proxy solve?</h2>
-        <p class="mb-3">The browser blocks requests to different domains for security (CORS). Our PHP proxy receives the request, forwards it to the API, and returns the response. The browser only sees traffic to your own server. Real code: <a class="source-link" href="../proxy.php" target="_blank">[Source: ../proxy.php]</a>.</p>
+        <p class="mb-3">The browser blocks requests to different domains for security (CORS). Our proxy receives the request, forwards it to the API, and returns the response. The browser only sees traffic to your own server. Real code: <a class="source-link" href="../api/proxy.js" target="_blank">[Source: ../api/proxy.js]</a>.</p>
         <p class="mt-3">Resource: <a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">MDN — CORS EN</a>.</p>
       </section>
 
       <section class="mb-8">
         <h2 class="text-xl font-bold text-[#4f378a] mb-3">Request flow</h2>
-        <pre>1. fetch('/proxy.php?endpoint=competitions/WC/matches')
-2. proxy.php receives the request
-3. Adds headers (Content-Type, X-Auth-Token)
-4. Forwards to api.football-data.org
-5. Returns response to the browser</pre>
+        <pre>1. fetch('/api/proxy?endpoint=competitions/WC/matches')
+2. The serverless function (api/proxy.js) receives the request
+3. Adds headers (X-Auth-Token, User-Agent)
+4. Forwards via fetch() to api.football-data.org/v4/...
+5. Returns JSON response to the browser</pre>
         <p class="mt-3">Helper functions in <a class="source-link" href="../js/api.js" target="_blank">[Source: ../js/api.js]</a>.</p>
         <p class="mt-3">Resource: <a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">MDN — Fetch EN</a>.</p>
       </section>
 
       <section class="mb-8">
         <h2 class="text-xl font-bold text-[#4f378a] mb-3">Security: hiding tokens</h2>
-        <p class="mb-3">The token is stored on the server (proxy.php), not in the HTML. If someone inspects your HTML, they only see the proxy call, not the secret key.</p>
+        <p class="mb-3">The token is stored on the server (in the serverless function <code>api/proxy.js</code>), not in the HTML. If someone inspects your HTML, they only see the proxy call, not the secret key.</p>
         <p class="mt-3">Resource: <a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/Security" target="_blank">MDN — Web security</a>.</p>
         <div class="tip-box mt-4">
           <strong>⚠️ Important:</strong> never expose tokens in the frontend. Use them only on the server or in environment variables.
@@ -161,7 +161,7 @@
         <ul class="list-disc pl-6 space-y-1">
           <li><a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">CORS — MDN EN</a></li>
           <li><a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank">Fetch API — MDN EN</a></li>
-          <li><a class="source-link" href="https://www.php.net/manual/en/book.curl.php" target="_blank">cURL in PHP — Official manual</a></li>
+          <li><a class="source-link" href="https://vercel.com/docs/functions/serverless-functions" target="_blank">Vercel Serverless Functions — Official docs</a></li>
         </ul>
       </section>
     </div>

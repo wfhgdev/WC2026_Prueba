@@ -158,7 +158,7 @@ async function obtenerDatos() {
         <h2 class="text-xl font-bold text-[#4f378a] mb-3">Fetch API</h2>
         <p class="mb-3"><code>fetch()</code> hace peticiones HTTP desde el navegador. En el proyecto tenemos dos flujos:</p>
         <ol class="list-decimal pl-6 space-y-1">
-          <li><strong>Proxy PHP</strong>: <code>fetch('proxy.php?endpoint=...')</code></li>
+          <li><strong>Proxy (serverless)</strong>: <code>fetch('/api/proxy?endpoint=...')</code></li>
           <li><strong>Directo</strong>: <code>fetch('https://api.football-data.org/...')</code></li>
         </ol>
         <pre>const response = await fetch('https://api.football-data.org/v4/competitions/WC/matches');
@@ -321,7 +321,7 @@ async function fetchData() {
         <h2 class="text-xl font-bold text-[#4f378a] mb-3">Fetch API</h2>
         <p class="mb-3"><code>fetch()</code> makes HTTP requests from the browser. In this project we have two flows:</p>
         <ol class="list-decimal pl-6 space-y-1">
-          <li><strong>PHP Proxy</strong>: <code>fetch('proxy.php?endpoint=...')</code></li>
+          <li><strong>Proxy (serverless)</strong>: <code>fetch('/api/proxy?endpoint=...')</code></li>
           <li><strong>Direct</strong>: <code>fetch('https://api.football-data.org/...')</code></li>
         </ol>
         <p class="mb-3">Project source: <a class="source-link" href="../js/api.js" target="_blank">[Source: ../js/api.js]</a>.</p>
